@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+    .error {
+        color: red;
+    }
+    </style>
+    <title>Save Category</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Car Shop</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Category</p>
+
+    <form action="#" th:action="@{/shop/categories/save}"
+          th:object="${category}"  method="POST">
+
+
+        <!-- Add hidden form field to handle update -->
+
+       <input type="hidden" th:field="*{idcategory}">
+
+        Category : <input  type="text" th:field="*{name}"
+                       class="form-control mb-4 col-4" >
+       <!-- <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
+        <errors path="name" cssClass="error" /> -->
+
+        <div class="alert alert-danger error" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+
+    </form>
+
+    <hr>
+    <a th:href="@{/shop/categories}">Back to Category List</a>
+
+</div>
+</body>
+
+</html>

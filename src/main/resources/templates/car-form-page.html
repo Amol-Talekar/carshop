@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <style>
+    .error {
+        color: red;
+    }
+    </style>
+    <title>Save Car</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Car Shop</h3>
+    <hr>
+
+    <p class="h4 mb-4">Save Car</p>
+
+    <form action="#" th:action="@{/shop/cars/saveCar}"
+          th:object="${car}"  method="POST">
+
+
+            <!-- Add hidden form field to handle update -->
+
+            <input type="hidden" th:field="*{idcar}">
+
+            Model : <input type="text" th:field="*{model}" placeholder="Model Name"
+                           class="form-control mb-4 col-4" >
+        <p th:if="${#fields.hasErrors('model')}" th:errorclass="error" th:errors="*{model}"></p>
+        <errors path="model" cssClass="error" />
+
+
+            Mileage :  <input type="text" th:field="*{mileage}"
+                              class="form-control mb-4 col-4" th:placeholder="Mileage">
+        <p th:if="${#fields.hasErrors('mileage')}" th:errorclass="error" th:errors="*{mileage}"></p>
+        <errors path="mileage" cssClass="error" />
+
+            Price : <input type="text" th:field="*{price}"
+                           class="form-control mb-4 col-4" th:placeholder="Price">
+        <p th:if="${#fields.hasErrors('price')}" th:errorclass="error" th:errors="*{price}"></p>
+        <errors path="price" cssClass="error" />
+
+            Category :
+        <select class="form-control" th:field="*{category}" id="dropCategory" style="width:500px">
+             <option value="0">Select category</option>
+            <option th:each="cat : ${categories}" th:value="${cat.idcategory}" th:text="${cat.name}"></option>
+        </select>
+        <p th:if="${#fields.hasErrors('category')}" th:errorclass="error" th:errors="*{category}"></p>
+        <errors path="category" cssClass="error" />
+        <br/>
+
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+
+
+    </form>
+
+    <hr>
+    <a th:href="@{/shop/cars}">Back to Car List</a>
+
+</div>
+</body>
+
+</html>
